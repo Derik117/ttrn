@@ -1,0 +1,6 @@
+{
+  "imports": {
+    "telegram-bot": "./mods/telegram-bot/mod.ts",
+    "telegram-bot-api": "./mods/telegram-bot-api/mod.ts"
+  }
+}
