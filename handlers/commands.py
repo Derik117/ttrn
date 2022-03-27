@@ -24,7 +24,6 @@ async def mention_all(msg: types.Message):
         '@uuttff8',
         '@r_levkovych',
         '@sunnydaily',
-        '@kirich_l',
         '@Derik117',
     }
 
