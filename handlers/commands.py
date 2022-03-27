@@ -2,7 +2,7 @@ from aiogram import types
 import aiogram.utils.markdown as md
 from pyrate_limiter import BucketFullException
 from misc import dp
-from config import admin_ids
+from config import config
 from utils import deanon_limiter
 
 
@@ -13,12 +13,26 @@ async def mention_all(msg: types.Message):
     Handler for mention all in chat.
     :param msg:
     """
-    await msg.answer('@bukhalo, @yaroslav_y, @qwertydemo, @ekzotech, @apushkarev, @spiritsn, @gusevsd, @uuttff8, '
-                     '@r_levkovych, @sunnydaily, @kirich_l, @Derik117')
+    users = {
+        '@bukhalo',
+        '@yaroslav_y',
+        '@qwertydemo',
+        '@ekzotech',
+        '@apushkarev',
+        '@spiritsn',
+        '@gusevsd',
+        '@uuttff8',
+        '@r_levkovych',
+        '@sunnydaily',
+        '@kirich_l',
+        '@Derik117',
+    }
+
+    await msg.answer(', '.join(users))
 
 
 @dp.message_handler(
-    lambda message: message['from']['id'] in admin_ids,
+    lambda message: message['from']['id'] in config.ADMIN_IDS,
     commands=['deanon']
 )
 async def deanon_cmd(msg: types.Message):

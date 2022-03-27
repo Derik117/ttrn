@@ -1,2 +1,0 @@
-mypy~=0.812
--r requirements.txt
