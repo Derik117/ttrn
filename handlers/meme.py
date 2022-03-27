@@ -1,6 +1,7 @@
 from misc import dp
 from aiogram import types, filters
-from utils import decision
+from utils import Decision
+from config import YAREK_DECISION_LIMIT, TOOPA_DECISION_LIMIT
 
 
 @dp.message_handler(
@@ -32,11 +33,11 @@ async def totaren(msg: types.Message):
     chat_type=types.ChatType.SUPERGROUP
 )
 async def yarek(msg: types.Message):
-    if decision(0.5):
+    if Decision.make(YAREK_DECISION_LIMIT):
         await msg.answer('Вы всё ещё готовите на огне @yaroslav_y? Тогда мы идём к вам.')
 
 
 @dp.message_handler(chat_type=types.ChatType.SUPERGROUP)
 async def toopa(msg: types.Message):
-    if decision(0.05):
+    if Decision.make(TOOPA_DECISION_LIMIT):
         await msg.reply('ТУПА АЛЕГАНТОР))))))')
