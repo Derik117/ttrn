@@ -1,6 +1,6 @@
 from aiogram import types
 from misc import bot, dp
-from config import GROUP_ID, admin_ids
+from config import config
 
 
 def thumb(msg: types.Message):
@@ -9,7 +9,7 @@ def thumb(msg: types.Message):
 
 
 @dp.message_handler(
-    lambda message: message['from']['id'] in admin_ids,
+    lambda message: message['from']['id'] in config.ADMIN_IDS,
     content_types=[
         types.ContentType.TEXT,
         types.ContentType.ANIMATION,
@@ -23,12 +23,12 @@ def thumb(msg: types.Message):
 async def repost(msg: types.Message):
     content_type = msg.content_type
     if content_type is types.ContentType.TEXT:
-        await bot.send_message(chat_id=GROUP_ID, text=msg.text)
+        await bot.send_message(chat_id=config.GROUP_ID, text=msg.text)
     # if self.audio:
     #     return ContentType.AUDIO
     if content_type is types.ContentType.ANIMATION:
         await bot.send_animation(
-            chat_id=GROUP_ID,
+            chat_id=config.GROUP_ID,
             animation=msg.animation.file_id,
             duration=msg.animation.duration,
             width=msg.animation.width,
@@ -39,7 +39,7 @@ async def repost(msg: types.Message):
         )
     if content_type is types.ContentType.DOCUMENT:
         await bot.send_document(
-            chat_id=GROUP_ID,
+            chat_id=config.GROUP_ID,
             document=msg.document.file_id,
             thumb=thumb(msg),
             caption=msg.caption,
@@ -50,7 +50,7 @@ async def repost(msg: types.Message):
     # if self.photo:
     #     return ContentType.PHOTO
     if content_type is types.ContentType.STICKER:
-        await bot.send_sticker(chat_id=GROUP_ID, sticker=msg.sticker.file_id)
+        await bot.send_sticker(chat_id=config.GROUP_ID, sticker=msg.sticker.file_id)
     # if self.video:
     #     return ContentType.VIDEO
     # if self.video_note:
@@ -66,7 +66,7 @@ async def repost(msg: types.Message):
     if content_type is types.ContentType.POLL:
         options = list(map(lambda option: option.text, msg.poll.options))
         await bot.send_poll(
-            chat_id=GROUP_ID,
+            chat_id=config.GROUP_ID,
             question=msg.poll.question,
             options=options,
             is_anonymous=msg.poll.is_anonymous,
@@ -81,4 +81,4 @@ async def repost(msg: types.Message):
 
         )
     if content_type is types.ContentType.DICE:
-        await bot.send_dice(chat_id=GROUP_ID)
+        await bot.send_dice(chat_id=config.GROUP_ID)

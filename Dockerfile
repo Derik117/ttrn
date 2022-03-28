@@ -6,8 +6,10 @@ RUN apk update && apk add \
                         libc-dev
 
 WORKDIR /app
-COPY requirements.txt ./
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir poetry==1.1.13
+RUN poetry config virtualenvs.create false
+COPY pyproject.toml poetry.lock ./
+RUN poetry install --no-dev
 ADD . .
 
 CMD ["python", "main.py"]

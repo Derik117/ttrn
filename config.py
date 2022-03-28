@@ -1,12 +1,25 @@
-from os import getenv
 from typing import List
+from pydantic import BaseSettings, Field
 
-TOKEN = getenv('TOKEN')
-GROUP_ID = getenv('GROUP')
-ADMIN_IDS = getenv('ADMIN_IDS')  # comma-separated list
-DECISION_SCALE_SIZE = int(getenv('DECISION_SCALE_SIZE', 100))
-YAREK_DECISION_LIMIT = int(getenv('YAREK_DECISION_LIMIT', 5))
-TOOPA_DECISION_LIMIT = int(getenv('TOOPA_DECISION_LIMIT', 5))
-DEANON_HOUR_LIMIT = int(getenv('DEANON_HOUR_LIMIT', 10))
 
-admin_ids: List[int] = list(map(int, ADMIN_IDS.split(",")))  # cast comma-separated list to `List[int]`
+class ListOfStrField(List[str]):
+    @classmethod
+    def __get_validators__(cls):
+        yield cls.validate
+
+    @classmethod
+    def validate(cls, v: str) -> List[str]:
+        return v.split(',')
+
+
+class Config(BaseSettings):
+    TOKEN: str
+    GROUP_ID: str
+    ADMIN_IDS: ListOfStrField
+    DECISION_SCALE_SIZE: int = 100
+    YAREK_DECISION_LIMIT: int = 5
+    TOOPA_DECISION_LIMIT: int = 5
+    DEANON_HOUR_LIMIT: int = 10
+
+
+config = Config()

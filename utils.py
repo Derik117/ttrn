@@ -1,11 +1,11 @@
 import random
 from pyrate_limiter import RequestRate, Duration, Limiter, MemoryListBucket, BucketFullException
 
-from config import DECISION_SCALE_SIZE, DEANON_HOUR_LIMIT
+from config import config
 
 
 class Decision:
-    scale: list[int] = list(range(DECISION_SCALE_SIZE))
+    scale: list[int] = list(range(config.DECISION_SCALE_SIZE))
 
     @classmethod
     def make(cls, probability: int) -> bool:
@@ -20,5 +20,5 @@ class RequestLimiter:
 
 
 deanon_limiter = RequestLimiter(
-    rate=RequestRate(DEANON_HOUR_LIMIT, Duration.HOUR),
+    rate=RequestRate(config.DEANON_HOUR_LIMIT, Duration.HOUR),
 )

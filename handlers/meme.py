@@ -1,7 +1,10 @@
+import random
+
 from misc import dp
 from aiogram import types, filters
 from utils import Decision
-from config import YAREK_DECISION_LIMIT, TOOPA_DECISION_LIMIT
+from config import config
+from random import choice
 
 
 @dp.message_handler(
@@ -21,6 +24,21 @@ async def pidor(msg: types.Message):
 
 
 @dp.message_handler(
+    filters.Text(equals=['уфа', 'уфимский', 'уфимская', 'уфимской', 'уфы', 'уфе'], ignore_case=True),
+    chat_type=types.ChatType.SUPERGROUP
+)
+async def pidor(msg: types.Message):
+    answers = (
+        'рубль лучшая валюта',
+        'сегодня все вложил в рублевый вклад',
+        'финансовая подушка должна быть в рублях',
+        'рубль укрепляется',
+        'покупаю товары за рубли',
+    )
+    await msg.answer(random.choice(answers))
+
+
+@dp.message_handler(
     filters.Text(equals=['тотарен', 'тотарин', 'толик', 'толян', 'еболик'], ignore_case=True),
     chat_type=types.ChatType.SUPERGROUP
 )
@@ -33,11 +51,11 @@ async def totaren(msg: types.Message):
     chat_type=types.ChatType.SUPERGROUP
 )
 async def yarek(msg: types.Message):
-    if Decision.make(YAREK_DECISION_LIMIT):
+    if Decision.make(config.YAREK_DECISION_LIMIT):
         await msg.answer('Вы всё ещё готовите на огне @yaroslav_y? Тогда мы идём к вам.')
 
 
 @dp.message_handler(chat_type=types.ChatType.SUPERGROUP)
 async def toopa(msg: types.Message):
-    if Decision.make(TOOPA_DECISION_LIMIT):
+    if Decision.make(config.TOOPA_DECISION_LIMIT):
         await msg.reply('ТУПА АЛЕГАНТОР))))))')
