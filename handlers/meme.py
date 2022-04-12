@@ -24,10 +24,9 @@ async def pidor(msg: types.Message):
 
 
 @dp.message_handler(
-    filters.Text(contains=[
-        'уфа', 'уфы', 'уфе', 'уфой', 'уфу', 'уфимскому', 'уфимских', 'уфимские', 'уфимским', 'уфимскую', 'уфимскими',
-        'уфимская', 'уфимского', 'уфимской', 'уфимском', 'уфимский',
-    ], ignore_case=True),
+    filters.Regexp(
+        r'(уфой|уфы|уфимскую|уфа|уфимскими|уфимской|уфимского|уфимских|уфе|уфимская|уфимским|уфимские|уфу|уфимский|уфимскому|уфимском)',
+    ),
     chat_type=types.ChatType.SUPERGROUP
 )
 async def ufa_ruble(msg: types.Message):
