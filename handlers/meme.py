@@ -70,3 +70,11 @@ async def yarek(msg: types.Message):
 async def toopa(msg: types.Message):
     if Decision.make(config.TOOPA_DECISION_LIMIT):
         await msg.reply('ТУПА АЛЕГАНТОР))))))')
+
+@dp.message_handler(
+    equals=['тема','темка','схема','схемы'],
+    ignore_case=True,
+    chat_type=types.ChatType.SUPERGROUP
+)
+async def scheme(msg: types.Message):
+    await msg.answer('заболел схематозом')
