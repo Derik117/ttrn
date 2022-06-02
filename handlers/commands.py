@@ -1,8 +1,9 @@
-from aiogram import types
 import aiogram.utils.markdown as md
+from aiogram import types
 from pyrate_limiter import BucketFullException
-from misc import dp
+
 from config import config
+from misc import dp
 from utils import deanon_limiter
 
 

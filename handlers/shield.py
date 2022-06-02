@@ -1,5 +1,6 @@
 from aiogram import types
 from aiogram.utils.callback_data import CallbackData
+
 from misc import bot, dp
 
 shield = CallbackData("shield", "user_id", "action")
@@ -9,8 +10,10 @@ shield = CallbackData("shield", "user_id", "action")
 async def new_member(msg: types.Message):
     if msg.from_user in msg.new_chat_members:
         buttons = [
-            types.InlineKeyboardButton(text="Ні", callback_data=shield.new(user_id=msg.from_user.id, action="allow")),
-            types.InlineKeyboardButton(text="Підор", callback_data=shield.new(user_id=msg.from_user.id, action="block")),
+            types.InlineKeyboardButton(text="Ні", callback_data=shield.new(
+                user_id=msg.from_user.id, action="allow")),
+            types.InlineKeyboardButton(text="Підор", callback_data=shield.new(
+                user_id=msg.from_user.id, action="block")),
         ]
         keyboard = types.InlineKeyboardMarkup(row_width=1)
         keyboard.add(*buttons)

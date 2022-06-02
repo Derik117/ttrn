@@ -1,14 +1,15 @@
 import random
 
-from misc import dp
-from aiogram import types, filters
-from utils import Decision
+from aiogram import filters, types
+
 from config import config
-from random import choice
+from misc import dp
+from utils import Decision
 
 
 @dp.message_handler(
-    filters.Text(equals=['дока', 'доку', 'документация', 'документацию'], ignore_case=True),
+    filters.Text(equals=['дока', 'доку', 'документация',
+                 'документацию'], ignore_case=True),
     chat_type=types.ChatType.SUPERGROUP
 )
 async def doka(msg: types.Message):
@@ -50,7 +51,8 @@ async def ufa_ruble(msg: types.Message):
 
 
 @dp.message_handler(
-    filters.Text(equals=['тотарен', 'тотарин', 'толик', 'толян', 'еболик'], ignore_case=True),
+    filters.Text(equals=['тотарен', 'тотарин', 'толик',
+                 'толян', 'еболик'], ignore_case=True),
     chat_type=types.ChatType.SUPERGROUP
 )
 async def totaren(msg: types.Message):
@@ -71,8 +73,9 @@ async def toopa(msg: types.Message):
     if Decision.make(config.TOOPA_DECISION_LIMIT):
         await msg.reply('ТУПА АЛЕГАНТОР))))))')
 
+
 @dp.message_handler(
-    equals=['тема','темка','схема','схемы'],
+    equals=['тема', 'темка', 'схема', 'схемы'],
     ignore_case=True,
     chat_type=types.ChatType.SUPERGROUP
 )
