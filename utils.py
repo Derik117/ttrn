@@ -1,5 +1,5 @@
 import random
-from pyrate_limiter import RequestRate, Duration, Limiter, MemoryListBucket, BucketFullException
+from pyrate_limiter import RequestRate, Duration, Limiter, MemoryListBucket
 
 from config import config
 

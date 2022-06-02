@@ -1,6 +1,7 @@
 from aiogram import types
-from misc import bot, dp
+
 from config import config
+from misc import bot, dp
 
 
 def thumb(msg: types.Message):
@@ -24,8 +25,6 @@ async def repost(msg: types.Message):
     content_type = msg.content_type
     if content_type is types.ContentType.TEXT:
         await bot.send_message(chat_id=config.GROUP_ID, text=msg.text)
-    # if self.audio:
-    #     return ContentType.AUDIO
     if content_type is types.ContentType.ANIMATION:
         await bot.send_animation(
             chat_id=config.GROUP_ID,
@@ -45,24 +44,8 @@ async def repost(msg: types.Message):
             caption=msg.caption,
             caption_entities=msg.caption_entities
         )
-    # if self.game:
-    #     return ContentType.GAME
-    # if self.photo:
-    #     return ContentType.PHOTO
     if content_type is types.ContentType.STICKER:
         await bot.send_sticker(chat_id=config.GROUP_ID, sticker=msg.sticker.file_id)
-    # if self.video:
-    #     return ContentType.VIDEO
-    # if self.video_note:
-    #     return ContentType.VIDEO_NOTE
-    # if self.voice:
-    #     return ContentType.VOICE
-    # if self.contact:
-    #     return ContentType.CONTACT
-    # if self.venue:
-    #     return ContentType.VENUE
-    # if self.location:
-    #     return ContentType.LOCATION
     if content_type is types.ContentType.POLL:
         options = list(map(lambda option: option.text, msg.poll.options))
         await bot.send_poll(

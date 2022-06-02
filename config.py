@@ -22,4 +22,4 @@ class Config(BaseSettings):
     DEANON_HOUR_LIMIT: int = 10
 
 
-config = Config()
+config = Config() # type: ignore
