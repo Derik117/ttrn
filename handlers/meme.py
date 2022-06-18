@@ -69,8 +69,7 @@ async def yarek(msg: types.Message):
 
 
 @dp.message_handler(
-    filters.Text(equals=['тема', 'темка', 'схема', 'схемы'],
-                 ignore_case=True,),
+    filters.Text(equals=['тема', 'темка', 'схема', 'схемы'], ignore_case=True),
     chat_type=types.ChatType.SUPERGROUP
 )
 async def scheme(msg: types.Message):
