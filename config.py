@@ -1,4 +1,5 @@
 from typing import List
+
 from pydantic import BaseSettings, Field
 
 
@@ -9,7 +10,7 @@ class ListOfStrField(List[str]):
 
     @classmethod
     def validate(cls, v: str) -> List[str]:
-        return v.split(',')
+        return str(v).split(',')
 
 
 class Config(BaseSettings):
@@ -22,4 +23,4 @@ class Config(BaseSettings):
     DEANON_HOUR_LIMIT: int = 10
 
 
-config = Config() # type: ignore
+config = Config('.env')  # type: ignore

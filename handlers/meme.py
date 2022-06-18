@@ -68,15 +68,9 @@ async def yarek(msg: types.Message):
         await msg.answer('Вы всё ещё готовите на огне @yaroslav_y? Тогда мы идём к вам.')
 
 
-@dp.message_handler(chat_type=types.ChatType.SUPERGROUP)
-async def toopa(msg: types.Message):
-    if Decision.make(config.TOOPA_DECISION_LIMIT):
-        await msg.reply('ТУПА АЛЕГАНТОР))))))')
-
-
 @dp.message_handler(
-    equals=['тема', 'темка', 'схема', 'схемы'],
-    ignore_case=True,
+    filters.Text(equals=['тема', 'темка', 'схема', 'схемы'],
+                 ignore_case=True,),
     chat_type=types.ChatType.SUPERGROUP
 )
 async def scheme(msg: types.Message):
